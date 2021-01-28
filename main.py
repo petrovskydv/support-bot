@@ -23,7 +23,8 @@ def echo(bot, update):
     """Echo the user message."""
     project_id = os.environ['GOOGLE_PROJECT_ID']
     answer = detect_intent_texts(project_id, update.message.chat['id'], [update.message.text], 'ru')
-    update.message.reply_text(answer)
+    if answer is not None:
+        update.message.reply_text(answer)
 
 
 def error_handler(bot, update, error):

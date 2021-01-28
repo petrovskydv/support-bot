@@ -26,7 +26,8 @@ def main():
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
             answer = detect_intent_texts(project_id, event.user_id, [event.text], 'ru')
-            echo(event, vk_api, answer)
+            if answer is not None:
+                echo(event, vk_api, answer)
 
 
 if __name__ == "__main__":

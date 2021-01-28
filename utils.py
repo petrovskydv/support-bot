@@ -22,10 +22,12 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
             request={'session': session, 'query_input': query_input})
 
         print('=' * 20)
+
         print('Query text: {}'.format(response.query_result.query_text))
         print('Detected intent: {} (confidence: {})\n'.format(
             response.query_result.intent.display_name,
             response.query_result.intent_detection_confidence))
         print('Fulfillment text: {}\n'.format(
             response.query_result.fulfillment_text))
-        return response.query_result.fulfillment_text
+        if not response.query_result.intent.is_fallback:
+            return response.query_result.fulfillment_text
