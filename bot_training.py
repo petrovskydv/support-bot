@@ -6,10 +6,7 @@ import dialogflow_v2beta1
 from dotenv import load_dotenv
 
 
-def create_intents(file_path, project_id):
-    with open(file_path, 'r', encoding='UTF-8') as my_file:
-        questions = json.load(my_file)
-
+def create_intents(questions, project_id):
     client = dialogflow_v2.IntentsClient()
     parent = client.project_agent_path(project_id)
 
@@ -28,6 +25,12 @@ def create_intents(file_path, project_id):
         client.create_intent(parent, intent)
 
 
+def fetch_questions_json(file_path):
+    with open(file_path, 'r', encoding='UTF-8') as my_file:
+        questions = json.load(my_file)
+    return questions
+
+
 def train_intents(project_id):
     client = dialogflow_v2beta1.AgentsClient()
     parent = client.project_path(project_id)
@@ -37,7 +40,8 @@ def train_intents(project_id):
 def main():
     load_dotenv()
     project_id = os.environ['GOOGLE_PROJECT_ID']
-    create_intents('questions.json', project_id)
+    questions = fetch_questions_json('questions.json')
+    create_intents(questions, project_id)
     train_intents(project_id)
 
 
