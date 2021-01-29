@@ -40,8 +40,7 @@ def train_intents(project_id):
 def main():
     load_dotenv()
     project_id = os.environ['GOOGLE_PROJECT_ID']
-    questions = fetch_questions_json('questions.json')
-    create_intents(questions, project_id)
+    create_intents(fetch_questions_json('questions.json'), project_id)
     train_intents(project_id)
 
 
