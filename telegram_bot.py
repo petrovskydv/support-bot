@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
-from utils import detect_intent_texts
+from utils import TelegramBotHandler, detect_intent_texts
 
 logger = logging.getLogger(__name__)
 
@@ -37,20 +37,22 @@ def main():
 
     load_dotenv()
     telegram_token = os.environ['TELEGRAM_TOKEN']
+    telegram_chat_id = os.environ['TELEGRAM_CHAT_ID']
+
+    logger_handler = TelegramBotHandler(telegram_token, telegram_chat_id)
+    logger_handler.setLevel(logging.WARNING)
+    logger_handler.formatter = logging.Formatter("%(name)s - %(levelname)s - %(message)s")
+    logger.addHandler(logger_handler)
 
     updater = Updater(telegram_token)
-
+    updater.logger.addHandler(logger_handler)
     dispatcher = updater.dispatcher
-
+    dispatcher.logger.addHandler(logger_handler)
     dispatcher.add_handler(CommandHandler("start", start))
     dispatcher.add_handler(CommandHandler("help", help_command))
-
     dispatcher.add_handler(MessageHandler(Filters.text, echo))
-
     dispatcher.add_error_handler(error_handler)
-
     updater.start_polling()
-
     updater.idle()
 
 
