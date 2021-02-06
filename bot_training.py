@@ -11,14 +11,13 @@ def create_intents(questions, project_id):
     parent = client.project_agent_path(project_id)
 
     for intent_name, texts in questions.items():
-        intent = {}
-        intent['display_name'] = intent_name
-        intent['messages'] = [
-            {
-                'text': {'text': [texts['answer']]}
-            }
-        ]
-        intent['training_phrases'] = []
+        intent = {'display_name': intent_name,
+                  'messages': [
+                      {
+                          'text': {'text': [texts['answer']]}
+                      }
+                  ],
+                  'training_phrases': []}
         for phrase in texts['questions']:
             intent['training_phrases'].append({'parts': [{'text': phrase}]})
 

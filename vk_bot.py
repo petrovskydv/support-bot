@@ -28,7 +28,7 @@ def main():
 
     logger_handler = TelegramBotHandler(telegram_token, telegram_chat_id)
     logger_handler.setLevel(logging.INFO)
-    logger_handler.formatter = logging.Formatter("%(name)s - %(levelname)s - %(message)s")
+    logger_handler.formatter = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
     logger.addHandler(logger_handler)
 
     while True:
@@ -45,5 +45,5 @@ def main():
             logger.exception('Error')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
