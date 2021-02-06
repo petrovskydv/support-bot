@@ -2,22 +2,22 @@
 
 Этот бот может отвечать на типовые вопросы пользователей. Если бот не понимает о чём речь, он просто молчит в ответ. 
 
-Бот работает с Telegram и [ВКонтакте](https://vk.com/).
+Бот работает с [Telegram](https://telegram.org/) и [ВКонтакте](https://vk.com/).
 
 ## Распознавание фраз
 Для распознавания фраз используется [DialogFlow](https://cloud.google.com/dialogflow/es/docs).
 
 Для этого необходимо создать:
-* [аккаунт](https://cloud.google.com/dialogflow/es/docs/quick/setup).
-* [агента](https://cloud.google.com/dialogflow/es/docs/quick/build-agent).
-* [JSON-ключ](https://cloud.google.com/docs/authentication/getting-started).
+* [аккаунт](https://cloud.google.com/dialogflow/es/docs/quick/setup)
+* [агента](https://cloud.google.com/dialogflow/es/docs/quick/build-agent)
+* [JSON-ключ](https://cloud.google.com/docs/authentication/getting-started)
 
 При создании аккаунта вы получите идентификатор проекта, например такой:
 ```
 moonlit-dynamo-211973
 ```
 
-## Создание бота в Telegram
+## Создание бота в [Telegram](https://telegram.org/)
 Вы получите его API ключ. Выглядит он так:
 ```
 95132391:wP3db3301vnrob33BZdb33KwP3db3F1I
@@ -31,9 +31,9 @@ moonlit-dynamo-211973
 
 ## Как установить
 Скачайте проект на свой компьютер.
-В папке проекта необходимо создать файл `.env`. В этом файле нужно создать переменные `VK_GROUP_ID` и `VK_ACCESS_TOKEN`.
+В папке проекта необходимо создать файл `.env`. В этом файле нужно создать переменные, указанные в образце.
 
-Пример содержимого файла:
+Образец файла:
 ```
 TELEGRAM_TOKEN='<API-ключ бота>'
 TELEGRAM_CHAT_ID='<ID чата для мониторинга>'
@@ -90,7 +90,7 @@ python bot_training.py
 
 ## Как запустить
 
-Для запуска бота Telegram на компьютере необходимо ввести в командной строке:
+Для запуска бота [Telegram](https://telegram.org/) на компьютере необходимо ввести в командной строке:
 ```
 python telegram_bot.py
 ```
