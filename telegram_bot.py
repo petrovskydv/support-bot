@@ -11,12 +11,12 @@ logger = logging.getLogger(__name__)
 
 def start(bot, update):
     """Send a message when the command /start is issued."""
-    update.message.reply_text('привет привет!!')
+    update.message.reply_text('Здравствуйте! Чем можем помочь?')
 
 
 def help_command(bot, update):
     """Send a message when the command /help is issued."""
-    update.message.reply_text('Help!')
+    update.message.reply_text('Бот постарается ответить на ваш вопрос. Если он не знает ответа - ответит оператор.')
 
 
 def echo(bot, update):
