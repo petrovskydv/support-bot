@@ -4,6 +4,14 @@
 
 Бот работает с [Telegram](https://telegram.org/) и [ВКонтакте](https://vk.com/).
 
+Пример результата для [Telegram](https://telegram.org/):
+
+![](docs/telegram_bot.gif)
+
+Пример результата для [ВКонтакте](https://vk.com/):
+
+![](docs/vk_bot.gif)
+
 ## Распознавание фраз
 Для распознавания фраз используется [DialogFlow](https://cloud.google.com/dialogflow/es/docs).
 
