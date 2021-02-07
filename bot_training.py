@@ -17,9 +17,7 @@ def create_intents(questions, project_id):
                           'text': {'text': [texts['answer']]}
                       }
                   ],
-                  'training_phrases': []}
-        for phrase in texts['questions']:
-            intent['training_phrases'].append({'parts': [{'text': phrase}]})
+                  'training_phrases': [{'parts': [{'text': phrase}]} for phrase in texts['questions']]}
 
         client.create_intent(parent, intent)
 
