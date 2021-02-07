@@ -11,7 +11,7 @@ from utils import TelegramBotHandler, detect_intent_texts
 logger = logging.getLogger(__name__)
 
 
-def echo(event, vk_api, answer):
+def send_vk_message(event, vk_api, answer):
     vk_api.messages.send(
         user_id=event.user_id,
         message=answer,
@@ -40,7 +40,7 @@ def main():
                 if event.type == VkEventType.MESSAGE_NEW and event.to_me:
                     answer = detect_intent_texts(project_id, event.user_id, [event.text], 'ru')
                     if answer is not None:
-                        echo(event, vk_api, answer)
+                        send_vk_message(event, vk_api, answer)
         except Exception:
             logger.exception('Error')
 
