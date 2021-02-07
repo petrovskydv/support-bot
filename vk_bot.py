@@ -1,6 +1,8 @@
 import logging
 import os
 import random
+import requests
+from google.api_core import exceptions
 
 import vk_api as vk
 from dotenv import load_dotenv
@@ -32,17 +34,21 @@ def main():
     logger.addHandler(logger_handler)
 
     while True:
+        vk_session = vk.VkApi(token=vk_token)
+        vk_api = vk_session.get_api()
         try:
-            vk_session = vk.VkApi(token=vk_token)
-            vk_api = vk_session.get_api()
             longpoll = VkLongPoll(vk_session)
             for event in longpoll.listen():
                 if event.type == VkEventType.MESSAGE_NEW and event.to_me:
                     answer = detect_intent_texts(project_id, event.user_id, [event.text], 'ru')
                     if answer is not None:
                         send_vk_message(event, vk_api, answer)
-        except Exception:
-            logger.exception('Error')
+        except vk.exceptions.ApiError as e:
+            logger.exception(f'VkApiError: {e}')
+        except requests.exceptions.ReadTimeout as e:
+            logger.exception(f'ReadTimeoutError: {e}')
+        except exceptions.GoogleAPIError as e:
+            logger.exception(f'GoogleAPIError: {e}')
 
 
 if __name__ == '__main__':
