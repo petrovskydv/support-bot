@@ -19,7 +19,7 @@ def help_command(bot, update):
     update.message.reply_text('Бот постарается ответить на ваш вопрос. Если он не знает ответа - ответит оператор.')
 
 
-def detect_intent_and_send_answer(bot, update):
+def send_answer(bot, update):
     """Echo the user message."""
     project_id = os.environ['GOOGLE_PROJECT_ID']
     answer = detect_intent_texts(project_id, update.message.chat['id'], [update.message.text], 'ru')
@@ -50,7 +50,7 @@ def main():
     dispatcher.logger.addHandler(logger_handler)
     dispatcher.add_handler(CommandHandler('start', start))
     dispatcher.add_handler(CommandHandler('help', help_command))
-    dispatcher.add_handler(MessageHandler(Filters.text, detect_intent_and_send_answer))
+    dispatcher.add_handler(MessageHandler(Filters.text, send_answer))
     dispatcher.add_error_handler(error_handler)
     updater.start_polling()
     updater.idle()
